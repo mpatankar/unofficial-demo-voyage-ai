@@ -7,10 +7,10 @@ const client = new Voyage({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource multimodalembeddings', () => {
+describe('resource multimodal', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.multimodalembeddings.create({ inputs: [{}], model: 'model' });
+    const responsePromise = client.embeddings.multimodal.create({ inputs: [{}], model: 'model' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource multimodalembeddings', () => {
 
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.multimodalembeddings.create({
+    const response = await client.embeddings.multimodal.create({
       inputs: [{}],
       model: 'model',
       input_type: 'query',

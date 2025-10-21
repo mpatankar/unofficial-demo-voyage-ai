@@ -2,21 +2,21 @@
 
 Types:
 
-- <code><a href="./src/resources/embeddings.ts">EmbeddingCreateResponse</a></code>
+- <code><a href="./src/resources/embeddings/embeddings.ts">EmbeddingCreateResponse</a></code>
 
 Methods:
 
-- <code title="post /embeddings">client.embeddings.<a href="./src/resources/embeddings.ts">create</a>({ ...params }) -> EmbeddingCreateResponse</code>
+- <code title="post /embeddings">client.embeddings.<a href="./src/resources/embeddings/embeddings.ts">create</a>({ ...params }) -> EmbeddingCreateResponse</code>
 
-# Multimodalembeddings
+## Multimodal
 
 Types:
 
-- <code><a href="./src/resources/multimodalembeddings.ts">MultimodalembeddingCreateResponse</a></code>
+- <code><a href="./src/resources/embeddings/multimodal.ts">MultimodalCreateResponse</a></code>
 
 Methods:
 
-- <code title="post /multimodalembeddings">client.multimodalembeddings.<a href="./src/resources/multimodalembeddings.ts">create</a>({ ...params }) -> MultimodalembeddingCreateResponse</code>
+- <code title="post /multimodalembeddings">client.embeddings.multimodal.<a href="./src/resources/embeddings/multimodal.ts">create</a>({ ...params }) -> MultimodalCreateResponse</code>
 
 # Rerank
 

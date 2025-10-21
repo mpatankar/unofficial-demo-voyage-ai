@@ -16,13 +16,12 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { EmbeddingCreateParams, EmbeddingCreateResponse, Embeddings } from './resources/embeddings';
-import {
-  MultimodalembeddingCreateParams,
-  MultimodalembeddingCreateResponse,
-  Multimodalembeddings,
-} from './resources/multimodalembeddings';
 import { Rerank, RerankCreateParams, RerankCreateResponse } from './resources/rerank';
+import {
+  EmbeddingCreateParams,
+  EmbeddingCreateResponse,
+  Embeddings,
+} from './resources/embeddings/embeddings';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -721,12 +720,10 @@ export class Voyage {
   static toFile = Uploads.toFile;
 
   embeddings: API.Embeddings = new API.Embeddings(this);
-  multimodalembeddings: API.Multimodalembeddings = new API.Multimodalembeddings(this);
   rerank: API.Rerank = new API.Rerank(this);
 }
 
 Voyage.Embeddings = Embeddings;
-Voyage.Multimodalembeddings = Multimodalembeddings;
 Voyage.Rerank = Rerank;
 
 export declare namespace Voyage {
@@ -736,12 +733,6 @@ export declare namespace Voyage {
     Embeddings as Embeddings,
     type EmbeddingCreateResponse as EmbeddingCreateResponse,
     type EmbeddingCreateParams as EmbeddingCreateParams,
-  };
-
-  export {
-    Multimodalembeddings as Multimodalembeddings,
-    type MultimodalembeddingCreateResponse as MultimodalembeddingCreateResponse,
-    type MultimodalembeddingCreateParams as MultimodalembeddingCreateParams,
   };
 
   export {

@@ -1,28 +1,25 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../core/resource';
-import { APIPromise } from '../core/api-promise';
-import { RequestOptions } from '../internal/request-options';
+import { APIResource } from '../../core/resource';
+import { APIPromise } from '../../core/api-promise';
+import { RequestOptions } from '../../internal/request-options';
 
-export class Multimodalembeddings extends APIResource {
+export class Multimodal extends APIResource {
   /**
    * The Voyage multimodal embedding endpoint returns vector representations for a
    * given list of multimodal inputs consisting of text, images, or an interleaving
    * of both modalities.
    */
-  create(
-    body: MultimodalembeddingCreateParams,
-    options?: RequestOptions,
-  ): APIPromise<MultimodalembeddingCreateResponse> {
+  create(body: MultimodalCreateParams, options?: RequestOptions): APIPromise<MultimodalCreateResponse> {
     return this._client.post('/multimodalembeddings', { body, ...options });
   }
 }
 
-export interface MultimodalembeddingCreateResponse {
+export interface MultimodalCreateResponse {
   /**
    * An array of embedding objects.
    */
-  data?: Array<MultimodalembeddingCreateResponse.Data>;
+  data?: Array<MultimodalCreateResponse.Data>;
 
   /**
    * Name of the model.
@@ -34,10 +31,10 @@ export interface MultimodalembeddingCreateResponse {
    */
   object?: string;
 
-  usage?: MultimodalembeddingCreateResponse.Usage;
+  usage?: MultimodalCreateResponse.Usage;
 }
 
-export namespace MultimodalembeddingCreateResponse {
+export namespace MultimodalCreateResponse {
   export interface Data {
     /**
      * The embedding vector consists of a list of floating-point numbers or a
@@ -76,7 +73,7 @@ export namespace MultimodalembeddingCreateResponse {
   }
 }
 
-export interface MultimodalembeddingCreateParams {
+export interface MultimodalCreateParams {
   /**
    * A list of multimodal inputs to be vectorized.
    *
@@ -200,9 +197,9 @@ export interface MultimodalembeddingCreateParams {
   truncation?: boolean;
 }
 
-export declare namespace Multimodalembeddings {
+export declare namespace Multimodal {
   export {
-    type MultimodalembeddingCreateResponse as MultimodalembeddingCreateResponse,
-    type MultimodalembeddingCreateParams as MultimodalembeddingCreateParams,
+    type MultimodalCreateResponse as MultimodalCreateResponse,
+    type MultimodalCreateParams as MultimodalCreateParams,
   };
 }
