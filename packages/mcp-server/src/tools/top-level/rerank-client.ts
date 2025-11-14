@@ -7,7 +7,7 @@ import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Voyage from 'unofficial-demo-voyage-ai';
 
 export const metadata: Metadata = {
-  resource: 'rerank',
+  resource: '$client',
   operation: 'write',
   tags: [],
   httpMethod: 'post',
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
 };
 
 export const tool: Tool = {
-  name: 'create_rerank',
+  name: 'rerank_client',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nVoyage reranker endpoint receives as input a query, a list of documents, and other arguments such as the model name, and returns a response containing the reranking results.\n\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/rerank_create_response',\n  $defs: {\n    rerank_create_response: {\n      type: 'object',\n      properties: {\n        data: {\n          type: 'array',\n          description: 'An array of the reranking results, sorted by the descending order of relevance scores.\\n',\n          items: {\n            type: 'object',\n            properties: {\n              document: {\n                type: 'string',\n                description: 'The document string. Only returned when return_documents is set to true.\\n'\n              },\n              index: {\n                type: 'integer',\n                description: 'The index of the document in the input list.'\n              },\n              relevance_score: {\n                type: 'number',\n                description: 'The relevance score of the document with respect to the query.'\n              }\n            }\n          }\n        },\n        model: {\n          type: 'string',\n          description: 'Name of the model.'\n        },\n        object: {\n          type: 'string',\n          description: 'The object type, which is always \"list\".'\n        },\n        usage: {\n          type: 'object',\n          properties: {\n            total_tokens: {\n              type: 'integer',\n              description: 'The total number of tokens used for computing the reranking.'\n            }\n          }\n        }\n      }\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nVoyage reranker endpoint receives as input a query, a list of documents, and other arguments such as the model name, and returns a response containing the reranking results.\n\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/rerank_response',\n  $defs: {\n    rerank_response: {\n      type: 'object',\n      properties: {\n        data: {\n          type: 'array',\n          description: 'An array of the reranking results, sorted by the descending order of relevance scores.\\n',\n          items: {\n            type: 'object',\n            properties: {\n              document: {\n                type: 'string',\n                description: 'The document string. Only returned when return_documents is set to true.\\n'\n              },\n              index: {\n                type: 'integer',\n                description: 'The index of the document in the input list.'\n              },\n              relevance_score: {\n                type: 'number',\n                description: 'The relevance score of the document with respect to the query.'\n              }\n            }\n          }\n        },\n        model: {\n          type: 'string',\n          description: 'Name of the model.'\n        },\n        object: {\n          type: 'string',\n          description: 'The object type, which is always \"list\".'\n        },\n        usage: {\n          type: 'object',\n          properties: {\n            total_tokens: {\n              type: 'integer',\n              description: 'The total number of tokens used for computing the reranking.'\n            }\n          }\n        }\n      }\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -69,7 +69,7 @@ export const tool: Tool = {
 export const handler = async (client: Voyage, args: Record<string, unknown> | undefined) => {
   const { jq_filter, ...body } = args as any;
   try {
-    return asTextContentResult(await maybeFilter(jq_filter, await client.rerank.create(body)));
+    return asTextContentResult(await maybeFilter(jq_filter, await client.rerank(body)));
   } catch (error) {
     if (isJqError(error)) {
       return asErrorResult(error.message);

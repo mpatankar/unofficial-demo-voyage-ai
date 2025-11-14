@@ -7,7 +7,7 @@ import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Voyage from 'unofficial-demo-voyage-ai';
 
 export const metadata: Metadata = {
-  resource: 'embeddings.multimodal',
+  resource: '$client',
   operation: 'write',
   tags: [],
   httpMethod: 'post',
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
 };
 
 export const tool: Tool = {
-  name: 'create_embeddings_multimodal',
+  name: 'embed_multimodal_client',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nThe Voyage multimodal embedding endpoint returns vector representations for a given list of multimodal inputs consisting of text, images, or an interleaving of both modalities.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/multimodal_create_response',\n  $defs: {\n    multimodal_create_response: {\n      type: 'object',\n      properties: {\n        data: {\n          type: 'array',\n          description: 'An array of embedding objects.',\n          items: {\n            type: 'object',\n            properties: {\n              embedding: {\n                type: 'array',\n                description: 'The embedding vector consists of a list of floating-point numbers or a Base64-encoded NumPy array depending on `output_encoding`. The length of this vector varies depending on the specific model.\\n',\n                items: {\n                  type: 'object',\n                  additionalProperties: true\n                }\n              },\n              index: {\n                type: 'integer',\n                description: 'An integer representing the index of the embedding within the list of embeddings.\\n'\n              },\n              object: {\n                type: 'string',\n                description: 'The object type, which is always `embedding`.'\n              }\n            }\n          }\n        },\n        model: {\n          type: 'string',\n          description: 'Name of the model.'\n        },\n        object: {\n          type: 'string',\n          description: 'The object type, which is always `list`.'\n        },\n        usage: {\n          type: 'object',\n          properties: {\n            image_pixels: {\n              type: 'integer',\n              description: 'The total number of image pixels in the list of inputs.'\n            },\n            text_tokens: {\n              type: 'integer',\n              description: 'The total number of text tokens in the list of inputs.'\n            },\n            total_tokens: {\n              type: 'integer',\n              description: 'The combined total of text and image tokens. Every 560 pixels counts as a token.'\n            }\n          }\n        }\n      }\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nThe Voyage multimodal embedding endpoint returns vector representations for a given list of multimodal inputs consisting of text, images, or an interleaving of both modalities.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/embed_multimodal_response',\n  $defs: {\n    embed_multimodal_response: {\n      type: 'object',\n      properties: {\n        data: {\n          type: 'array',\n          description: 'An array of embedding objects.',\n          items: {\n            type: 'object',\n            properties: {\n              embedding: {\n                type: 'array',\n                description: 'The embedding vector consists of a list of floating-point numbers or a Base64-encoded NumPy array depending on `output_encoding`. The length of this vector varies depending on the specific model.\\n',\n                items: {\n                  type: 'object',\n                  additionalProperties: true\n                }\n              },\n              index: {\n                type: 'integer',\n                description: 'An integer representing the index of the embedding within the list of embeddings.\\n'\n              },\n              object: {\n                type: 'string',\n                description: 'The object type, which is always `embedding`.'\n              }\n            }\n          }\n        },\n        model: {\n          type: 'string',\n          description: 'Name of the model.'\n        },\n        object: {\n          type: 'string',\n          description: 'The object type, which is always `list`.'\n        },\n        usage: {\n          type: 'object',\n          properties: {\n            image_pixels: {\n              type: 'integer',\n              description: 'The total number of image pixels in the list of inputs.'\n            },\n            text_tokens: {\n              type: 'integer',\n              description: 'The total number of text tokens in the list of inputs.'\n            },\n            total_tokens: {\n              type: 'integer',\n              description: 'The combined total of text and image tokens. Every 560 pixels counts as a token.'\n            }\n          }\n        }\n      }\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -67,7 +67,7 @@ export const tool: Tool = {
 export const handler = async (client: Voyage, args: Record<string, unknown> | undefined) => {
   const { jq_filter, ...body } = args as any;
   try {
-    return asTextContentResult(await maybeFilter(jq_filter, await client.embeddings.multimodal.create(body)));
+    return asTextContentResult(await maybeFilter(jq_filter, await client.embedMultimodal(body)));
   } catch (error) {
     if (isJqError(error)) {
       return asErrorResult(error.message);

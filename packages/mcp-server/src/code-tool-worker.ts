@@ -40,10 +40,10 @@ function getRunFunctionNode(
   return null;
 }
 
-const fuse = new Fuse(
-  ['client.embeddings.create', 'client.embeddings.multimodal.create', 'client.rerank.create'],
-  { threshold: 1, shouldSort: true },
-);
+const fuse = new Fuse(['client.embed', 'client.embedMultimodal', 'client.rerank'], {
+  threshold: 1,
+  shouldSort: true,
+});
 
 function getMethodSuggestions(fullyQualifiedMethodName: string): string[] {
   return fuse

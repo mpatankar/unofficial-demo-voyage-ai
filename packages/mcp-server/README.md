@@ -206,7 +206,7 @@ http://localhost:3000?client=cursor&capability=tool-name-length%3D40
 import { server, endpoints, init } from "voyage-mcp/server";
 
 // import a specific tool
-import createEmbeddings from "voyage-mcp/tools/embeddings/create-embeddings";
+import embedClient from "voyage-mcp/tools/top-level/embed-client";
 
 // initialize the server and all endpoints
 init({ server, endpoints });
@@ -231,21 +231,15 @@ const myCustomEndpoint = {
 };
 
 // initialize the server with your custom endpoints
-init({ server: myServer, endpoints: [createEmbeddings, myCustomEndpoint] });
+init({ server: myServer, endpoints: [embedClient, myCustomEndpoint] });
 ```
 
 ## Available Tools
 
 The following tools are available in this MCP server.
 
-### Resource `embeddings`:
+### Resource `$client`:
 
-- `create_embeddings` (`write`): Voyage text embedding endpoint receives as input a string (or a list of strings) and other arguments such as the preferred model name, and returns a response containing a list of embeddings.
-
-### Resource `embeddings.multimodal`:
-
-- `create_embeddings_multimodal` (`write`): The Voyage multimodal embedding endpoint returns vector representations for a given list of multimodal inputs consisting of text, images, or an interleaving of both modalities.
-
-### Resource `rerank`:
-
-- `create_rerank` (`write`): Voyage reranker endpoint receives as input a query, a list of documents, and other arguments such as the model name, and returns a response containing the reranking results.
+- `embed_client` (`write`): Voyage text embedding endpoint receives as input a string (or a list of strings) and other arguments such as the preferred model name, and returns a response containing a list of embeddings.
+- `embed_multimodal_client` (`write`): The Voyage multimodal embedding endpoint returns vector representations for a given list of multimodal inputs consisting of text, images, or an interleaving of both modalities.
+- `rerank_client` (`write`): Voyage reranker endpoint receives as input a query, a list of documents, and other arguments such as the model name, and returns a response containing the reranking results.

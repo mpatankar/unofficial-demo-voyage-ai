@@ -7,7 +7,7 @@ import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Voyage from 'unofficial-demo-voyage-ai';
 
 export const metadata: Metadata = {
-  resource: 'embeddings',
+  resource: '$client',
   operation: 'write',
   tags: [],
   httpMethod: 'post',
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
 };
 
 export const tool: Tool = {
-  name: 'create_embeddings',
+  name: 'embed_client',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nVoyage text embedding endpoint receives as input a string (or a list of strings) and other arguments such as the preferred model name, and returns a response containing a list of embeddings.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/embedding_create_response',\n  $defs: {\n    embedding_create_response: {\n      type: 'object',\n      properties: {\n        data: {\n          type: 'array',\n          description: 'An array of embedding objects.',\n          items: {\n            type: 'object',\n            properties: {\n              embedding: {\n                type: 'array',\n                description: 'Each embedding is a vector represented as an array of float numbers when `output_dtype` is set to `float` and as an array of integers for all other values of `output_dtype` (`int8`, `uint8`, `binary`, and `ubinary`). The length of this vector varies depending on the specific model, `output_dimension`, and `output_dtype`.\\n',\n                items: {\n                  type: 'number'\n                }\n              },\n              index: {\n                type: 'integer',\n                description: 'An integer representing the index of the embedding within the list of embeddings.\\n'\n              },\n              object: {\n                type: 'string',\n                description: 'The object type, which is always \"embedding\".'\n              }\n            }\n          }\n        },\n        model: {\n          type: 'string',\n          description: 'Name of the model.'\n        },\n        object: {\n          type: 'string',\n          description: 'The object type, which is always \"list\".'\n        },\n        usage: {\n          type: 'object',\n          properties: {\n            total_tokens: {\n              type: 'integer',\n              description: 'The total number of tokens used for computing the embeddings.'\n            }\n          }\n        }\n      }\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nVoyage text embedding endpoint receives as input a string (or a list of strings) and other arguments such as the preferred model name, and returns a response containing a list of embeddings.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/embed_response',\n  $defs: {\n    embed_response: {\n      type: 'object',\n      properties: {\n        data: {\n          type: 'array',\n          description: 'An array of embedding objects.',\n          items: {\n            type: 'object',\n            properties: {\n              embedding: {\n                type: 'array',\n                description: 'Each embedding is a vector represented as an array of float numbers when `output_dtype` is set to `float` and as an array of integers for all other values of `output_dtype` (`int8`, `uint8`, `binary`, and `ubinary`). The length of this vector varies depending on the specific model, `output_dimension`, and `output_dtype`.\\n',\n                items: {\n                  type: 'number'\n                }\n              },\n              index: {\n                type: 'integer',\n                description: 'An integer representing the index of the embedding within the list of embeddings.\\n'\n              },\n              object: {\n                type: 'string',\n                description: 'The object type, which is always \"embedding\".'\n              }\n            }\n          }\n        },\n        model: {\n          type: 'string',\n          description: 'Name of the model.'\n        },\n        object: {\n          type: 'string',\n          description: 'The object type, which is always \"list\".'\n        },\n        usage: {\n          type: 'object',\n          properties: {\n            total_tokens: {\n              type: 'integer',\n              description: 'The total number of tokens used for computing the embeddings.'\n            }\n          }\n        }\n      }\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -85,7 +85,7 @@ export const tool: Tool = {
 export const handler = async (client: Voyage, args: Record<string, unknown> | undefined) => {
   const { jq_filter, ...body } = args as any;
   try {
-    return asTextContentResult(await maybeFilter(jq_filter, await client.embeddings.create(body)));
+    return asTextContentResult(await maybeFilter(jq_filter, await client.embed(body)));
   } catch (error) {
     if (isJqError(error)) {
       return asErrorResult(error.message);
