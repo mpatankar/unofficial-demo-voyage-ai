@@ -4,7 +4,7 @@ import { isJqError, maybeFilter } from 'voyage-mcp/filtering';
 import { Metadata, asErrorResult, asTextContentResult } from 'voyage-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
-import Voyage from 'voyage';
+import Voyage from 'unofficial-demo-voyage-ai';
 
 export const metadata: Metadata = {
   resource: 'embeddings.multimodal',

@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from 'voyage/core/api-promise';
+import { APIPromise } from 'unofficial-demo-voyage-ai/core/api-promise';
 
 import util from 'node:util';
-import Voyage from 'voyage';
-import { APIUserAbortError } from 'voyage';
+import Voyage from 'unofficial-demo-voyage-ai';
+import { APIUserAbortError } from 'unofficial-demo-voyage-ai';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {

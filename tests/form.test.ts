@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from 'voyage/internal/uploads';
-import { toFile } from 'voyage/core/uploads';
+import { multipartFormRequestOptions, createForm } from 'unofficial-demo-voyage-ai/internal/uploads';
+import { toFile } from 'unofficial-demo-voyage-ai/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {
