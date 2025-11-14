@@ -9,8 +9,8 @@ It is generated with [Stainless](https://www.stainless.com/).
 Because it's not published yet, clone the repo and build it:
 
 ```sh
-git clone git@github.com:stainless-sdks/voyage-typescript.git
-cd voyage-typescript
+git clone git@github.com:mpatankar/unofficial-demo-voyage-ai.git
+cd unofficial-demo-voyage-ai
 ./scripts/bootstrap
 ./scripts/build
 ```
@@ -40,7 +40,11 @@ For clients with a configuration JSON, it might look something like this:
   "mcpServers": {
     "voyage_api": {
       "command": "node",
-      "args": ["/path/to/local/voyage-typescript/packages/mcp-server", "--client=claude", "--tools=all"],
+      "args": [
+        "/path/to/local/unofficial-demo-voyage-ai/packages/mcp-server",
+        "--client=claude",
+        "--tools=all"
+      ],
       "env": {
         "VOYAGE_API_KEY": "My API Key"
       }
