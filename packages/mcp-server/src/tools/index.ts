@@ -4,9 +4,9 @@ import { Metadata, Endpoint, HandlerFunction } from './types';
 
 export { Metadata, Endpoint, HandlerFunction };
 
-import create_embeddings from './embeddings/create-embeddings';
-import create_embeddings_multimodal from './embeddings/multimodal/create-embeddings-multimodal';
-import create_rerank from './rerank/create-rerank';
+import embed_client from './top-level/embed-client';
+import embed_multimodal_client from './top-level/embed-multimodal-client';
+import rerank_client from './top-level/rerank-client';
 
 export const endpoints: Endpoint[] = [];
 
@@ -14,9 +14,9 @@ function addEndpoint(endpoint: Endpoint) {
   endpoints.push(endpoint);
 }
 
-addEndpoint(create_embeddings);
-addEndpoint(create_embeddings_multimodal);
-addEndpoint(create_rerank);
+addEndpoint(embed_client);
+addEndpoint(embed_multimodal_client);
+addEndpoint(rerank_client);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

@@ -26,9 +26,9 @@ const client = new Voyage({
   apiKey: process.env['VOYAGE_API_KEY'], // This is the default and can be omitted
 });
 
-const embedding = await client.embeddings.create({ input: 'REPLACE_ME', model: 'REPLACE_ME' });
+const response = await client.embed({ input: 'REPLACE_ME', model: 'REPLACE_ME' });
 
-console.log(embedding.data);
+console.log(response.data);
 ```
 
 ### Request & Response types
@@ -43,8 +43,8 @@ const client = new Voyage({
   apiKey: process.env['VOYAGE_API_KEY'], // This is the default and can be omitted
 });
 
-const params: Voyage.EmbeddingCreateParams = { input: 'REPLACE_ME', model: 'REPLACE_ME' };
-const embedding: Voyage.EmbeddingCreateResponse = await client.embeddings.create(params);
+const params: Voyage.EmbedParams = { input: 'REPLACE_ME', model: 'REPLACE_ME' };
+const response: Voyage.EmbedResponse = await client.embed(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -57,17 +57,15 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const embedding = await client.embeddings
-  .create({ input: 'REPLACE_ME', model: 'REPLACE_ME' })
-  .catch(async (err) => {
-    if (err instanceof Voyage.APIError) {
-      console.log(err.status); // 400
-      console.log(err.name); // BadRequestError
-      console.log(err.headers); // {server: 'nginx', ...}
-    } else {
-      throw err;
-    }
-  });
+const response = await client.embed({ input: 'REPLACE_ME', model: 'REPLACE_ME' }).catch(async (err) => {
+  if (err instanceof Voyage.APIError) {
+    console.log(err.status); // 400
+    console.log(err.name); // BadRequestError
+    console.log(err.headers); // {server: 'nginx', ...}
+  } else {
+    throw err;
+  }
+});
 ```
 
 Error codes are as follows:
@@ -99,7 +97,7 @@ const client = new Voyage({
 });
 
 // Or, configure per-request:
-await client.embeddings.create({ input: 'REPLACE_ME', model: 'REPLACE_ME' }, {
+await client.embed({ input: 'REPLACE_ME', model: 'REPLACE_ME' }, {
   maxRetries: 5,
 });
 ```
@@ -116,7 +114,7 @@ const client = new Voyage({
 });
 
 // Override per-request:
-await client.embeddings.create({ input: 'REPLACE_ME', model: 'REPLACE_ME' }, {
+await client.embed({ input: 'REPLACE_ME', model: 'REPLACE_ME' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -139,15 +137,15 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Voyage();
 
-const response = await client.embeddings.create({ input: 'REPLACE_ME', model: 'REPLACE_ME' }).asResponse();
+const response = await client.embed({ input: 'REPLACE_ME', model: 'REPLACE_ME' }).asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: embedding, response: raw } = await client.embeddings
-  .create({ input: 'REPLACE_ME', model: 'REPLACE_ME' })
+const { data: response, response: raw } = await client
+  .embed({ input: 'REPLACE_ME', model: 'REPLACE_ME' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(embedding.data);
+console.log(response.data);
 ```
 
 ### Logging
@@ -227,7 +225,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.embeddings.create({
+client.embed({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',
