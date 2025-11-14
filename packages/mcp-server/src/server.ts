@@ -10,8 +10,8 @@ import {
   Implementation,
   Tool,
 } from '@modelcontextprotocol/sdk/types.js';
-import { ClientOptions } from 'voyage';
-import Voyage from 'voyage';
+import { ClientOptions } from 'unofficial-demo-voyage-ai';
+import Voyage from 'unofficial-demo-voyage-ai';
 import {
   applyCompatibilityTransformations,
   ClientCapabilities,
@@ -27,14 +27,14 @@ import { McpOptions } from './options';
 export { McpOptions } from './options';
 export { ClientType } from './compat';
 export { Filter } from './tools';
-export { ClientOptions } from 'voyage';
+export { ClientOptions } from 'unofficial-demo-voyage-ai';
 export { endpoints } from './tools';
 
 export const newMcpServer = () =>
   new McpServer(
     {
-      name: 'voyage_api',
-      version: '0.0.1',
+      name: 'unofficial_demo_voyage_ai_api',
+      version: '0.1.0',
     },
     { capabilities: { tools: {}, logging: {} } },
   );

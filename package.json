@@ -1,12 +1,12 @@
 {
-  "name": "voyage",
-  "version": "0.0.1",
+  "name": "unofficial-demo-voyage-ai",
+  "version": "0.1.0",
   "description": "The official TypeScript library for the Voyage API",
   "author": "Voyage <contact@voyageai.com>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
-  "repository": "github:stainless-sdks/voyage-typescript",
+  "repository": "github:mpatankar/unofficial-demo-voyage-ai",
   "license": "MIT",
   "packageManager": "yarn@1.22.22",
   "files": [

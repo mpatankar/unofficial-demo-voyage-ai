@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "voyage/*": ["./dist/src/*"],
-      "voyage": ["./dist/src/index.ts"]
+      "unofficial-demo-voyage-ai/*": ["./dist/src/*"],
+      "unofficial-demo-voyage-ai": ["./dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,

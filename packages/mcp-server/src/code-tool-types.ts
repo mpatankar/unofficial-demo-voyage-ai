@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { ClientOptions } from 'voyage';
+import { ClientOptions } from 'unofficial-demo-voyage-ai';
 
 export type WorkerInput = {
   opts: ClientOptions;

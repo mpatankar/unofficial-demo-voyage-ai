@@ -8,8 +8,8 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "paths": {
-      "voyage/*": ["./src/*"],
-      "voyage": ["./src/index.ts"]
+      "unofficial-demo-voyage-ai/*": ["./src/*"],
+      "unofficial-demo-voyage-ai": ["./src/index.ts"]
     },
     "noEmit": true,
 

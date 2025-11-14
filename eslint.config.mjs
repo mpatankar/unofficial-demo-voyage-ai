@@ -25,7 +25,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              regex: '^voyage(/.*)?',
+              regex: '^unofficial-demo-voyage-ai(/.*)?',
               message: 'Use a relative import, not a package import.',
             },
           ],
