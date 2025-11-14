@@ -1,6 +1,6 @@
 {
   "name": "voyage",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "The official TypeScript library for the Voyage API",
   "author": "Voyage <contact@voyageai.com>",
   "types": "dist/index.d.ts",
