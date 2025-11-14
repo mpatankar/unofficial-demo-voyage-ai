@@ -34,7 +34,7 @@ export const newMcpServer = () =>
   new McpServer(
     {
       name: 'unofficial_demo_voyage_ai_api',
-      version: '0.0.1',
+      version: '0.1.0',
     },
     { capabilities: { tools: {}, logging: {} } },
   );
