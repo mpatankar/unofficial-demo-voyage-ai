@@ -9,9 +9,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stainless-sdks/voyage-typescript.git"
+    "url": "git+https://github.com/mpatankar/unofficial-demo-voyage-ai.git"
   },
-  "homepage": "https://github.com/stainless-sdks/voyage-typescript/tree/main/packages/mcp-server#readme",
+  "homepage": "https://github.com/mpatankar/unofficial-demo-voyage-ai/tree/main/packages/mcp-server#readme",
   "documentation": "https://docs.voyageai.com/docs/faq",
   "server": {
     "type": "node",
