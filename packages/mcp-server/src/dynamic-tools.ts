@@ -1,4 +1,4 @@
-import Voyage from 'voyage';
+import Voyage from 'unofficial-demo-voyage-ai';
 import { Endpoint, asTextContentResult, ToolCallResult } from './tools/types';
 import { zodToJsonSchema } from 'zod-to-json-schema';
 import { z } from 'zod';

@@ -2,7 +2,7 @@
 
 import { dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import Voyage, { ClientOptions } from 'voyage';
+import Voyage, { ClientOptions } from 'unofficial-demo-voyage-ai';
 import { ContentBlock, Endpoint, Metadata, ToolCallResult } from './tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';

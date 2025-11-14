@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Voyage from 'voyage';
+import Voyage from 'unofficial-demo-voyage-ai';
 
 const client = new Voyage({
   apiKey: 'My API Key',

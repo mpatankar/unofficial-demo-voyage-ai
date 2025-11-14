@@ -6,7 +6,7 @@ import Fuse from 'fuse.js';
 import ts from 'typescript';
 
 import { WorkerInput, WorkerSuccess, WorkerError } from './code-tool-types';
-import { Voyage } from 'voyage';
+import { Voyage } from 'unofficial-demo-voyage-ai';
 
 function getRunFunctionNode(
   code: string,
