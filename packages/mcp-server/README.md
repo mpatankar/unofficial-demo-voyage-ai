@@ -54,7 +54,7 @@ If you use Claude Code, you can install the MCP server by running the command be
 environment variables in Claude Code's `.claude.json`, which can be found in your home directory.
 
 ```
-claude mcp add --transport stdio unofficial_demo_voyage_ai_api --env VOYAGE_API_KEY="Your VOYAGE_API_KEY here." -- npx -y voyage-mcp
+claude mcp add voyage_mcp_api --env VOYAGE_API_KEY="Your VOYAGE_API_KEY here." -- npx -y voyage-mcp
 ```
 
 ## Code Mode
