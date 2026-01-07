@@ -66,15 +66,17 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const response = await client.embed({ input: 'REPLACE_ME', model: 'REPLACE_ME' }).catch(async (err) => {
-  if (err instanceof Voyage.APIError) {
-    console.log(err.status); // 400
-    console.log(err.name); // BadRequestError
-    console.log(err.headers); // {server: 'nginx', ...}
-  } else {
-    throw err;
-  }
-});
+const response = await client
+  .embed({ input: 'REPLACE_ME', model: 'REPLACE_ME' })
+  .catch(async (err) => {
+    if (err instanceof Voyage.APIError) {
+      console.log(err.status); // 400
+      console.log(err.name); // BadRequestError
+      console.log(err.headers); // {server: 'nginx', ...}
+    } else {
+      throw err;
+    }
+  });
 ```
 
 Error codes are as follows:

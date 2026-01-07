@@ -58,7 +58,11 @@ describe('top level methods', () => {
 
   // Prism tests are disabled
   test.skip('rerank: only required params', async () => {
-    const responsePromise = client.rerank({ documents: ['string'], model: 'model', query: 'query' });
+    const responsePromise = client.rerank({
+      documents: ['string'],
+      model: 'model',
+      query: 'query',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
