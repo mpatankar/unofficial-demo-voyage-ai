@@ -3,12 +3,13 @@
 import { ClientOptions } from 'unofficial-demo-voyage-ai';
 
 export type WorkerInput = {
-  opts: ClientOptions;
+  project_name: string;
   code: string;
+  client_opts: ClientOptions;
 };
-export type WorkerSuccess = {
+export type WorkerOutput = {
+  is_error: boolean;
   result: unknown | null;
-  logLines: string[];
-  errLines: string[];
+  log_lines: string[];
+  err_lines: string[];
 };
-export type WorkerError = { message: string | undefined };

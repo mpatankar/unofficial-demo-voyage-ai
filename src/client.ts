@@ -14,14 +14,16 @@ import * as Opts from './internal/request-options';
 import { VERSION } from './version';
 import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
-import * as API from './resources/index';
-import { APIPromise } from './core/api-promise';
-import { Rerank, RerankCreateParams, RerankCreateResponse } from './resources/rerank';
+import * as TopLevelAPI from './resources/top-level';
 import {
-  EmbeddingCreateParams,
-  EmbeddingCreateResponse,
-  Embeddings,
-} from './resources/embeddings/embeddings';
+  EmbedMultimodalParams,
+  EmbedMultimodalResponse,
+  EmbedParams,
+  EmbedResponse,
+  RerankParams,
+  RerankResponse,
+} from './resources/top-level';
+import { APIPromise } from './core/api-promise';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -119,7 +121,7 @@ export class Voyage {
   baseURL: string;
   maxRetries: number;
   timeout: number;
-  logger: Logger | undefined;
+  logger: Logger;
   logLevel: LogLevel | undefined;
   fetchOptions: MergedRequestInit | undefined;
 
@@ -201,6 +203,36 @@ export class Voyage {
    */
   #baseURLOverridden(): boolean {
     return this.baseURL !== 'https://api.voyageai.com/v1';
+  }
+
+  /**
+   * Voyage text embedding endpoint receives as input a string (or a list of strings)
+   * and other arguments such as the preferred model name, and returns a response
+   * containing a list of embeddings.
+   */
+  embed(body: TopLevelAPI.EmbedParams, options?: RequestOptions): APIPromise<TopLevelAPI.EmbedResponse> {
+    return this.post('/embeddings', { body, ...options });
+  }
+
+  /**
+   * The Voyage multimodal embedding endpoint returns vector representations for a
+   * given list of multimodal inputs consisting of text, images, or an interleaving
+   * of both modalities.
+   */
+  embedMultimodal(
+    body: TopLevelAPI.EmbedMultimodalParams,
+    options?: RequestOptions,
+  ): APIPromise<TopLevelAPI.EmbedMultimodalResponse> {
+    return this.post('/multimodalembeddings', { body, ...options });
+  }
+
+  /**
+   * Voyage reranker endpoint receives as input a query, a list of documents, and
+   * other arguments such as the model name, and returns a response containing the
+   * reranking results.
+   */
+  rerank(body: TopLevelAPI.RerankParams, options?: RequestOptions): APIPromise<TopLevelAPI.RerankResponse> {
+    return this.post('/rerank', { body, ...options });
   }
 
   protected defaultQuery(): Record<string, string | undefined> | undefined {
@@ -718,26 +750,17 @@ export class Voyage {
   static UnprocessableEntityError = Errors.UnprocessableEntityError;
 
   static toFile = Uploads.toFile;
-
-  embeddings: API.Embeddings = new API.Embeddings(this);
-  rerank: API.Rerank = new API.Rerank(this);
 }
-
-Voyage.Embeddings = Embeddings;
-Voyage.Rerank = Rerank;
 
 export declare namespace Voyage {
   export type RequestOptions = Opts.RequestOptions;
 
   export {
-    Embeddings as Embeddings,
-    type EmbeddingCreateResponse as EmbeddingCreateResponse,
-    type EmbeddingCreateParams as EmbeddingCreateParams,
-  };
-
-  export {
-    Rerank as Rerank,
-    type RerankCreateResponse as RerankCreateResponse,
-    type RerankCreateParams as RerankCreateParams,
+    type EmbedResponse as EmbedResponse,
+    type EmbedMultimodalResponse as EmbedMultimodalResponse,
+    type RerankResponse as RerankResponse,
+    type EmbedParams as EmbedParams,
+    type EmbedMultimodalParams as EmbedMultimodalParams,
+    type RerankParams as RerankParams,
   };
 }

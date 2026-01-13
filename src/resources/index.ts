@@ -1,8 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  Embeddings,
-  type EmbeddingCreateResponse,
-  type EmbeddingCreateParams,
-} from './embeddings/embeddings';
-export { Rerank, type RerankCreateResponse, type RerankCreateParams } from './rerank';
+  type EmbedResponse,
+  type EmbedMultimodalResponse,
+  type RerankResponse,
+  type EmbedParams,
+  type EmbedMultimodalParams,
+  type RerankParams,
+} from './top-level';
